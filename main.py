@@ -1,13 +1,10 @@
 import matplotlib.pyplot as plt
 
-
 MAX_ALTITUDE = 11000
 TABLE_STEP = 1000
 CHART_STEP = 100
 
-
 def calculate_air_properties(altitude):
-    """Calculate atmospheric properties at a given altitude."""
     temperature = 15.04 - 0.00649 * altitude
 
     pressure = 101.29 * (
@@ -26,7 +23,6 @@ def calculate_air_properties(altitude):
 
 
 def get_valid_altitude():
-    """Get a valid altitude from the user."""
     while True:
         try:
             altitude = float(
@@ -41,10 +37,7 @@ def get_valid_altitude():
             continue
 
         return altitude
-
-
 def show_single_altitude():
-    """Display atmospheric properties at one altitude."""
     altitude = get_valid_altitude()
     properties = calculate_air_properties(altitude)
 
@@ -55,9 +48,7 @@ def show_single_altitude():
     print(f"Pressure:       {properties['pressure']:.2f} kPa")
     print(f"Air density:    {properties['density']:.4f} kg/m^3")
 
-
 def show_properties_table(include_reduction=False):
-    """Display atmospheric properties in a table."""
     sea_level_properties = calculate_air_properties(0)
     sea_level_density = sea_level_properties["density"]
 
@@ -77,7 +68,6 @@ def show_properties_table(include_reduction=False):
             f"{'Pressure (kPa)':>17} {'Density (kg/m^3)':>19}"
         )
         print("-" * 63)
-
     for altitude in range(0, MAX_ALTITUDE + 1, TABLE_STEP):
         properties = calculate_air_properties(altitude)
         density = properties["density"]
@@ -88,7 +78,6 @@ def show_properties_table(include_reduction=False):
                 / sea_level_density
                 * 100
             )
-
             print(
                 f"{altitude:12.0f} "
                 f"{properties['temperature']:12.2f} "
@@ -111,7 +100,6 @@ def show_properties_table(include_reduction=False):
 
 
 def plot_density_vs_altitude():
-    """Plot air density against altitude."""
     altitudes = []
     densities = []
 
@@ -138,17 +126,15 @@ def plot_density_vs_altitude():
 
 
 def show_menu():
-    """Display the main menu."""
     print("\nAIR DENSITY VS. ALTITUDE")
     print("1. Calculate properties at one altitude")
-    print("2. Show the properties table (Version 2.0)")
-    print("3. Plot density vs. altitude (Version 3.0)")
-    print("4. Show density reduction from sea level (Version 4.0)")
+    print("2. Show the properties table")
+    print("3. Plot density vs. altitude")
+    print("4. Show density reduction from sea level")
     print("5. Exit")
 
 
 def main():
-    """Run the program."""
     while True:
         show_menu()
         choice = input("Choose an option (1-5): ").strip()
